@@ -1,54 +1,36 @@
-@model Day3_NguyenVanNghiep.Models.Product
+﻿@model Day3_NguyenVanNghiep.Models.Product
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h2>Thêm sản phẩm</h2>
 
-<h4>Product</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
 
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
+    <p>Tên sản phẩm:</p>
+    <input asp-for="Name" />
+    <span asp-validation-for="Name" style="color:red"></span>
 
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
+    <p>Giá sản phẩm:</p>
+    <input asp-for="Price" />
+    <span asp-validation-for="Price" style="color:red"></span>
 
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
+    <p>Mô tả:</p>
+    <input asp-for="Description" />
 
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <input asp-for="CategoryId" class="form-control" />
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
+    <p>Chọn Category có sẵn:</p>
 
-            <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    <select asp-for="CategoryId" asp-items="ViewBag.Categories">
+        <option value="">-- Chọn Category --</option>
+    </select>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <span asp-validation-for="CategoryId" style="color:red"></span>
+
+    <br /><br />
+
+    <button type="submit">Thêm sản phẩm</button>
+
+    <a asp-action="Index">Quay lại</a>
+</form>
